@@ -26,20 +26,20 @@ Fig.1 Illustration of image rotation
 #include &ltatlconv.h&gt</code></pre>
 9. Copy following codes to the "_tmain" fuction that is defined in test.cpp.
 <pre><code>Mat src, dst;		
-	if (2 != argc)
-	{
-		cout << "usage: test  imagename";
-		return 0;
-	}
-	USES_CONVERSION;
-	src = imread(W2A(argv[1]), 1);	
-	Point pt(50, 50);
-	rotateImage(src, dst, pt, 30);	
-	string window_name = "haha...";
-	namedWindow(window_name);
-	imshow(window_name, dst);
-	waitKey(0);
-	return 0;</code></pre>
+if (2 != argc)
+{
+    cout << "usage: test  imagename";
+    return 0;
+}
+USES_CONVERSION;
+src = imread(W2A(argv[1]), 1);	
+Point pt(50, 50);
+rotateImage(src, dst, pt, 30);	
+string window_name = "haha...";
+namedWindow(window_name);
+imshow(window_name, dst);
+waitKey(0);
+return 0;</code></pre>
 10. Build the "test" project.
 
 ## Contact with us
