@@ -23,8 +23,7 @@ Fig.1 Illustration of image rotation
    * opencv_imgproc2411.lib
 8. Include necessary header files in test.cpp.
 <pre><code>#include "RotateImage.h"
-#include &ltatlconv.h&gt
-using namespace std;</code></pre>
+#include &ltatlconv.h&gt</code></pre>
 9. Copy following codes to the "_tmain" fuction that is defined in test.cpp.
 <pre><code>Mat src, dst;		
 	if (2 != argc)
