@@ -90,20 +90,23 @@ void getTranslation(int _imgWidth, int _imgHeight, int& _tx, int& _ty, int & _ne
 	_newHeight = (int)(maxY - minY + 0.5);
 }
 
-void rotateImage(Mat& img, Mat& rotatedImg, Point& center, float degreesCCW = 30)
+void rotateImage(Mat& img, Mat& rotatedImg, Mat& _rot_mat, Point center, float degreesCCW = 30)
 {
-	Mat rot_mat;
-	rot_mat = getRotationMatrix2D(center, degreesCCW, 1.0);
+	//Mat rot_mat;
+	_rot_mat = getRotationMatrix2D(center, degreesCCW, 1.0);
 	float rad = degreesCCW * 3.1415926 / 180;
 	int tx, ty;
 	int newW, newH;
 	getTranslation(img.cols, img.rows, tx, ty, newW, newH, center.x, center.y, rad);
-	rot_mat.at<double>(0, 2) += tx;
-	rot_mat.at<double>(1, 2) += ty;
+	_rot_mat.at<double>(0, 2) += tx;
+	_rot_mat.at<double>(1, 2) += ty;
 	
-	warpAffine(img, rotatedImg, rot_mat, Size(newW, newH));
+	warpAffine(img, rotatedImg, _rot_mat, Size(newW, newH));	
+}
 
-	int xx = center.x * rot_mat.ptr<double>(0)[0] + center.y * rot_mat.ptr<double>(0)[1] + rot_mat.ptr<double>(0)[2];
-	int yy = center.x * rot_mat.ptr<double>(1)[0] + center.y * rot_mat.ptr<double>(1)[1] + rot_mat.ptr<double>(1)[2];
-	center = Point(xx, yy);
+Point warpAffine_point(Point _origPoint, Mat _rot_mat)
+{
+	int xx = (int)(_origPoint.x * _rot_mat.ptr<double>(0)[0] + _origPoint.y * _rot_mat.ptr<double>(0)[1] + _rot_mat.ptr<double>(0)[2] + 0.5);
+	int yy = (int)(_origPoint.x * _rot_mat.ptr<double>(1)[0] + _origPoint.y * _rot_mat.ptr<double>(1)[1] + _rot_mat.ptr<double>(1)[2] + 0.5);
+	return Point(xx, yy);
 }

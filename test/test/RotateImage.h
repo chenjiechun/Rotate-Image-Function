@@ -7,4 +7,5 @@
 using namespace cv;
 using namespace std;
 
-void rotateImage(Mat&, Mat&, Point&, float);
+void rotateImage(Mat&, Mat&, Mat&, Point, float);
+Point warpAffine_point(Point, Mat);
